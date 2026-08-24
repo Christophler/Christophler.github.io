@@ -25,3 +25,7 @@ Thumbs.db
 # IDE
 .vscode/
 .idea/
+
+# Local memos (not published)
+RESUME.local.md
+public/assets/README.md
