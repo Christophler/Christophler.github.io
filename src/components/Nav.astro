@@ -15,10 +15,10 @@ const navItems = [
 ];
 ---
 
-<header>
+<header class="site-header">
   <nav aria-label="Main">
-    <a href="/">{site.shortName}</a>
-    <ul>
+    <a class="site-logo" href="/">{site.shortName}</a>
+    <ul class="site-nav-links">
       {
         navItems.map((item) => (
           <li>
@@ -27,6 +27,6 @@ const navItems = [
         ))
       }
     </ul>
-    {site.showOpenToWorkPill && <span>Open to work</span>}
+    {site.showOpenToWorkPill && <span class="open-to-work-pill">Open to work</span>}
   </nav>
 </header>
