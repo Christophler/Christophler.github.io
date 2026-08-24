@@ -1,0 +1,17 @@
+---
+import { featuredProjects } from '../data/featured-projects';
+import ProjectCard from './ProjectCard.astro';
+---
+
+<section class="featured-projects" aria-labelledby="featured-projects-heading">
+  <h2 id="featured-projects-heading">Featured projects</h2>
+  <ul class="featured-projects-grid">
+    {
+      featuredProjects.map((project) => (
+        <li>
+          <ProjectCard project={project} />
+        </li>
+      ))
+    }
+  </ul>
+</section>

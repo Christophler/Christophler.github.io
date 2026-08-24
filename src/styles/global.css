@@ -121,6 +121,62 @@ p {
   max-width: none;
 }
 
+.featured-projects {
+  margin-block: var(--section-gap);
+}
+
+.featured-projects h2 {
+  margin: 0 0 1.5rem;
+  font-size: 1.25rem;
+}
+
+.featured-projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 18rem), 1fr));
+  gap: 1rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.project-card {
+  padding: 1.25rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background-color: var(--color-bg-elevated);
+}
+
+.project-card h3 {
+  margin: 0 0 0.5rem;
+  font-size: 1.0625rem;
+}
+
+.project-card h3 a {
+  color: var(--color-text);
+  text-decoration: none;
+}
+
+.project-card h3 a:hover {
+  color: var(--color-accent);
+}
+
+.project-card p {
+  margin: 0;
+  color: var(--color-text-muted);
+  font-size: 0.9375rem;
+}
+
+.project-card-stack {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  list-style: none;
+  margin: 1rem 0 0;
+  padding: 0;
+  font-size: 0.875rem;
+  color: var(--color-text-muted);
+}
+
 .site-header {
   position: sticky;
   top: 0;

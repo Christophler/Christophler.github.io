@@ -1,0 +1,15 @@
+projects:
+  - title: Cloud API Gateway
+    slug: cloud-api-gateway
+    description: Unified internal API layer that cut duplicate integrations across three product teams.
+    stack:
+      - FastAPI
+      - Azure Functions
+      - PostgreSQL
+  - title: Azure Function Diagnostics
+    slug: azure-function-diagnostics
+    description: Traced production timeouts with structured logging and Application Insights dashboards.
+    stack:
+      - Azure Functions
+      - Python
+      - Application Insights
