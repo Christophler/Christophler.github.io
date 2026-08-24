@@ -1,0 +1,10 @@
+groups:
+  - label: Languages
+    items: [Python, TypeScript, Go, SQL]
+  - label: Cloud
+    items: [Microsoft Azure (AZ-900), Azure AI (AI-900), Azure Data (DP-900), Docker, Kubernetes]
+  - label: DevOps
+    items: [GitHub Actions, Terraform, CI/CD, Monitoring]
+  - label: Data
+    items: [PostgreSQL, Redis, Event-driven systems]
+learning: [Rust, Platform engineering patterns]

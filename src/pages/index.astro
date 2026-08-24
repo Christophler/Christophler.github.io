@@ -2,7 +2,30 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import CredibilityStrip from '../components/CredibilityStrip.astro';
 import FeaturedProjects from '../components/FeaturedProjects.astro';
+import Pillars from '../components/Pillars.astro';
+import SkillsTags from '../components/SkillsTags.astro';
 import { site } from '../data/site';
+
+const experienceSnapshot = [
+  {
+    role: 'Software Engineering Intern',
+    company: 'Example Corp',
+    period: '2024',
+  },
+  {
+    role: 'Backend coursework & personal projects',
+    company: 'Cloud APIs, Azure Functions, CI/CD',
+    period: 'Ongoing',
+  },
+];
+
+const writeupTeasers = [
+  {
+    title: 'Tracing a production timeout in an Azure Function',
+    date: '2024-11',
+    href: '/writeups/debugging-azure-function',
+  },
+];
 ---
 
 <BaseLayout>
@@ -16,6 +39,58 @@ import { site } from '../data/site';
       <a href={`mailto:${site.email}`}>Get in touch</a>
     </p>
   </section>
+
   <CredibilityStrip />
   <FeaturedProjects />
+  <Pillars />
+
+  <section class="landing-section" aria-labelledby="experience-snapshot-heading">
+    <h2 id="experience-snapshot-heading">Experience</h2>
+    <ul class="plain-list">
+      {
+        experienceSnapshot.map((entry) => (
+          <li>
+            <span class="plain-list-primary">{entry.role}</span>
+            <span class="plain-list-muted">
+              {entry.company} · {entry.period}
+            </span>
+          </li>
+        ))
+      }
+    </ul>
+    <p class="section-link">
+      <a href="/experience">Full experience & certifications</a>
+    </p>
+  </section>
+
+  <section class="landing-section" aria-labelledby="writeups-teaser-heading">
+    <h2 id="writeups-teaser-heading">Writeups</h2>
+    <ul class="plain-list">
+      {
+        writeupTeasers.map((post) => (
+          <li>
+            <a href={post.href}>{post.title}</a>
+            <span class="plain-list-muted">{post.date}</span>
+          </li>
+        ))
+      }
+    </ul>
+    <p class="section-link">
+      <a href="/writeups">All writeups</a>
+    </p>
+  </section>
+
+  <SkillsTags />
+
+  <section class="contact-cta" aria-labelledby="contact-cta-heading">
+    <h2 id="contact-cta-heading">Contact</h2>
+    <p>
+      Open to backend and cloud roles —
+      <a href={`mailto:${site.email}`}>email</a>
+      ·
+      <a href={site.linkedin} target="_blank" rel="noopener noreferrer">LinkedIn</a>
+      ·
+      <a href={site.github} target="_blank" rel="noopener noreferrer">GitHub</a>
+    </p>
+  </section>
 </BaseLayout>

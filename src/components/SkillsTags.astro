@@ -1,0 +1,24 @@
+---
+import { skills } from '../data/skills';
+---
+
+<section class="skills" aria-labelledby="skills-heading">
+  <h2 id="skills-heading">Skills</h2>
+  <div class="skills-groups">
+    {
+      skills.groups.map((group) => (
+        <div class="skills-group">
+          <h3>{group.label}</h3>
+          <p class="skills-tags">{group.items.join(' · ')}</p>
+        </div>
+      ))
+    }
+  </div>
+  {
+    skills.learning.length > 0 && (
+      <p class="skills-learning">
+        <span>Currently learning:</span> {skills.learning.join(' · ')}
+      </p>
+    )
+  }
+</section>

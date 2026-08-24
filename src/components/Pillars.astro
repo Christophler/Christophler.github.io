@@ -1,0 +1,34 @@
+---
+const pillars = [
+  {
+    title: 'Reliability first',
+    body: 'Design APIs and cloud services that fail loudly, recover cleanly, and stay operable in production.',
+  },
+  {
+    title: 'Own the path to deploy',
+    body: 'Ship with CI/CD, observability, and infrastructure as code so changes are repeatable—not tribal knowledge.',
+  },
+  {
+    title: 'Debug with evidence',
+    body: 'Trace timeouts and regressions through logs, metrics, and reproduction before guessing at fixes.',
+  },
+  {
+    title: 'Write for the next engineer',
+    body: 'Document decisions, redact secrets, and leave runbooks that a teammate can follow under pressure.',
+  },
+];
+---
+
+<section class="pillars" aria-labelledby="pillars-heading">
+  <h2 id="pillars-heading">How I work</h2>
+  <ul class="pillars-grid">
+    {
+      pillars.map((pillar) => (
+        <li>
+          <h3>{pillar.title}</h3>
+          <p>{pillar.body}</p>
+        </li>
+      ))
+    }
+  </ul>
+</section>
