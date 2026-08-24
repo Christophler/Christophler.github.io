@@ -1,17 +1,10 @@
 ---
-const title = 'Christopher Law';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { site } from '../data/site';
 ---
 
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>{title}</title>
-  </head>
-  <body>
-    <main>
-      <h1>{title}</h1>
-      <p>Portfolio site — scaffold in progress.</p>
-    </main>
-  </body>
-</html>
+<BaseLayout>
+  <h1>{site.name}</h1>
+  <p>{site.tagline}</p>
+  <p>Portfolio site — scaffold in progress.</p>
+</BaseLayout>
