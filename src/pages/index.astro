@@ -1,10 +1,19 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import CredibilityStrip from '../components/CredibilityStrip.astro';
 import { site } from '../data/site';
 ---
 
 <BaseLayout>
-  <h1>{site.name}</h1>
-  <p>{site.tagline}</p>
-  <p>Portfolio site — scaffold in progress.</p>
+  <section class="hero">
+    <h1>{site.name}</h1>
+    <p class="hero-role">{site.title}</p>
+    <p class="hero-tagline">{site.tagline}</p>
+    <p class="hero-cta">
+      <a href="/projects">View projects</a>
+      <span class="hero-cta-sep" aria-hidden="true">·</span>
+      <a href={`mailto:${site.email}`}>Get in touch</a>
+    </p>
+  </section>
+  <CredibilityStrip />
 </BaseLayout>
