@@ -1,0 +1,26 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ProjectCard from '../../components/ProjectCard.astro';
+import { featuredProjects } from '../../data/featured-projects';
+import { site } from '../../data/site';
+---
+
+<BaseLayout
+  title={`Projects · ${site.name}`}
+  description="Selected backend and cloud projects."
+>
+  <section class="page-header">
+    <h1>Projects</h1>
+    <p>Selected backend and cloud work — APIs, infrastructure, and reliability.</p>
+  </section>
+
+  <ul class="featured-projects-grid">
+    {
+      featuredProjects.map((project) => (
+        <li>
+          <ProjectCard project={project} />
+        </li>
+      ))
+    }
+  </ul>
+</BaseLayout>
