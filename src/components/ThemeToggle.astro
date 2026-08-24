@@ -1,0 +1,83 @@
+<button
+  type="button"
+  class="theme-toggle"
+  data-theme-toggle
+  data-theme-preference="system"
+  aria-label="Theme: system. Activate to switch to light mode."
+  title="Toggle color theme"
+>
+  <svg class="theme-toggle-icon theme-toggle-icon--light" aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+    <circle cx="12" cy="12" r="4"></circle>
+    <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"></path>
+  </svg>
+  <svg class="theme-toggle-icon theme-toggle-icon--dark" aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+  </svg>
+  <svg class="theme-toggle-icon theme-toggle-icon--system" aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+    <rect x="2" y="3" width="20" height="14" rx="2"></rect>
+    <path d="M8 21h8M12 17v4"></path>
+  </svg>
+</button>
+
+<script>
+  const STORAGE_KEY = 'theme';
+  const MODES = ['light', 'dark', 'system'] as const;
+
+  const labels: Record<(typeof MODES)[number], string> = {
+    light: 'Theme: light. Activate to switch to dark mode.',
+    dark: 'Theme: dark. Activate to switch to system preference.',
+    system: 'Theme: system. Activate to switch to light mode.',
+  };
+
+  function resolveTheme(preference: string): 'light' | 'dark' {
+    if (preference === 'dark') return 'dark';
+    if (preference === 'light') return 'light';
+    return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+  }
+
+  function applyTheme(preference: (typeof MODES)[number]) {
+    document.documentElement.dataset.theme = resolveTheme(preference);
+    document.documentElement.dataset.themePreference = preference;
+    updateToggle(preference);
+  }
+
+  function updateToggle(preference: (typeof MODES)[number]) {
+    const button = document.querySelector<HTMLButtonElement>('[data-theme-toggle]');
+    if (!button) return;
+
+    button.dataset.themePreference = preference;
+    button.setAttribute('aria-label', labels[preference]);
+  }
+
+  function cycleTheme() {
+    const stored = localStorage.getItem(STORAGE_KEY) ?? 'system';
+    const current = MODES.includes(stored as (typeof MODES)[number])
+      ? (stored as (typeof MODES)[number])
+      : 'system';
+    const next = MODES[(MODES.indexOf(current) + 1) % MODES.length];
+
+    localStorage.setItem(STORAGE_KEY, next);
+    applyTheme(next);
+  }
+
+  function initThemeToggle() {
+    const stored = localStorage.getItem(STORAGE_KEY) ?? 'system';
+    const preference = MODES.includes(stored as (typeof MODES)[number])
+      ? (stored as (typeof MODES)[number])
+      : 'system';
+
+    updateToggle(preference);
+
+    document.querySelector('[data-theme-toggle]')?.addEventListener('click', cycleTheme);
+
+    window
+      .matchMedia('(prefers-color-scheme: dark)')
+      .addEventListener('change', () => {
+        if ((localStorage.getItem(STORAGE_KEY) ?? 'system') === 'system') {
+          applyTheme('system');
+        }
+      });
+  }
+
+  initThemeToggle();
+</script>

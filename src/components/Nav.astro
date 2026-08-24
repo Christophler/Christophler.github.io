@@ -1,5 +1,6 @@
 ---
 import type { SiteConfig } from '../data/site';
+import ThemeToggle from './ThemeToggle.astro';
 
 interface Props {
   site: SiteConfig;
@@ -27,6 +28,9 @@ const navItems = [
         ))
       }
     </ul>
-    {site.showOpenToWorkPill && <span class="open-to-work-pill">Open to work</span>}
+    <div class="site-header-actions">
+      {site.showOpenToWorkPill && <span class="open-to-work-pill">Open to work</span>}
+      <ThemeToggle />
+    </div>
   </nav>
 </header>
