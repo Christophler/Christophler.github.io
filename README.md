@@ -2,6 +2,8 @@
 
 Static portfolio site built with [Astro](https://astro.build), deployed to GitHub Pages at [christophler.github.io](https://christophler.github.io).
 
+Requires **Node.js ≥ 22.12.0** (Astro 7 engine requirement). Local and CI use Node 22.
+
 ## Local development
 
 ```bash
@@ -20,7 +22,7 @@ npm run preview
 
 ## Deployment
 
-The site targets the GitHub user-site repo `Christophler/Christophler.github.io` with `base: '/'`. Deploy workflow and CI will be added in later commits.
+Pushes to `main` build and deploy via GitHub Actions (`.github/workflows/deploy.yml`) to the user site at [christophler.github.io](https://christophler.github.io) (`base: '/'`).
 
 ## License
 
