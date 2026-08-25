@@ -241,6 +241,16 @@ p {
   font-size: 1.0625rem;
 }
 
+/* In-page hash targets clear the sticky site header */
+.page-section-anchor,
+.availability h2,
+.timeline h2,
+.certifications,
+.skills h2,
+.resume-cta h2 {
+  scroll-margin-top: calc(var(--header-height) + 0.75rem);
+}
+
 .case-study {
   max-width: var(--content-prose);
 }
@@ -440,7 +450,6 @@ p {
 
 .certifications {
   margin-block: var(--section-gap);
-  scroll-margin-top: calc(var(--header-height) + 0.75rem);
 }
 
 .certifications h2 {
