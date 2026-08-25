@@ -5,25 +5,15 @@ import CredibilityStrip from '../components/CredibilityStrip.astro';
 import FeaturedProjects from '../components/FeaturedProjects.astro';
 import Pillars from '../components/Pillars.astro';
 import SkillsTags from '../components/SkillsTags.astro';
+import { experience, formatExperiencePeriod } from '../data/experience';
 import { site } from '../data/site';
-
-const experienceSnapshot = [
-  {
-    role: 'Software Engineering Intern',
-    company: 'Example Corp',
-    period: '2024',
-  },
-  {
-    role: 'Backend coursework & personal projects',
-    company: 'Cloud APIs, Azure Functions, CI/CD',
-    period: 'Ongoing',
-  },
-];
 
 const dateFormatter = new Intl.DateTimeFormat('en-US', {
   year: 'numeric',
   month: 'short',
 });
+
+const experienceSnapshot = experience.entries.slice(0, 2);
 
 const writeupTeasers = (
   await getCollection('writeups', ({ data }) => !data.draft)
@@ -60,7 +50,7 @@ const writeupTeasers = (
           <li>
             <span class="plain-list-primary">{entry.role}</span>
             <span class="plain-list-muted">
-              {entry.company} · {entry.period}
+              {entry.company} · {formatExperiencePeriod(entry.start, entry.end)}
             </span>
           </li>
         ))

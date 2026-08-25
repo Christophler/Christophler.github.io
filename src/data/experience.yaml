@@ -1,0 +1,19 @@
+entries:
+  - role: Software Engineering Intern
+    company: Example Corp
+    location: Remote
+    start: 2024-05
+    end: 2024-08
+    bullets:
+      - built: REST API endpoints serving 10k daily requests
+      - deployed: containerized service to Azure App Service via GitHub Actions
+      - improved: API latency by 30% through query optimization
+  - role: Backend coursework & personal projects
+    company: Independent
+    location: Remote
+    start: 2023-01
+    end: present
+    bullets:
+      - built: Cloud APIs and Azure Functions with automated tests
+      - deployed: static and serverless apps via GitHub Actions
+      - improved: local developer workflows with Docker Compose setups
