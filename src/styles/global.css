@@ -121,6 +121,55 @@ p {
   max-width: none;
 }
 
+.credibility-strip a {
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.credibility-strip-sep {
+  margin-inline: 0.35rem;
+}
+
+.availability {
+  margin-block: var(--section-gap);
+}
+
+.availability h2 {
+  margin: 0 0 1.25rem;
+  font-size: 1.25rem;
+}
+
+.availability-list {
+  display: grid;
+  gap: 1rem;
+  margin: 0;
+}
+
+@media (min-width: 640px) {
+  .availability-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: 2rem;
+  }
+}
+
+.availability-list > div {
+  display: grid;
+  gap: 0.2rem;
+}
+
+.availability-list dt {
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.availability-list dd {
+  margin: 0;
+  font-size: 0.9375rem;
+}
+
 .featured-projects {
   margin-block: var(--section-gap);
 }

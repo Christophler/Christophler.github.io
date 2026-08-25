@@ -1,0 +1,45 @@
+---
+import { jobSearch } from '../data/job-search';
+
+const statusLabels: Record<string, string> = {
+  'actively-searching': 'Actively searching',
+  passive: 'Open to opportunities',
+  'not-searching': 'Not searching',
+};
+
+const statusLabel = statusLabels[jobSearch.status] ?? jobSearch.status;
+---
+
+<section class="availability" aria-labelledby="availability-heading">
+  <h2 id="availability-heading">Availability</h2>
+  <dl class="availability-list">
+    <div>
+      <dt>Status</dt>
+      <dd>{statusLabel}</dd>
+    </div>
+    <div>
+      <dt>Open to</dt>
+      <dd>{jobSearch.openTo.join(' · ')}</dd>
+    </div>
+    <div>
+      <dt>Focus</dt>
+      <dd>{jobSearch.focus.join(' · ')}</dd>
+    </div>
+    <div>
+      <dt>Location</dt>
+      <dd>{jobSearch.location}</dd>
+    </div>
+    <div>
+      <dt>Remote</dt>
+      <dd>{jobSearch.remotePreference}</dd>
+    </div>
+    <div>
+      <dt>Work authorization</dt>
+      <dd>{jobSearch.workAuthorization}</dd>
+    </div>
+    <div>
+      <dt>Start date</dt>
+      <dd>{jobSearch.startDate}</dd>
+    </div>
+  </dl>
+</section>
