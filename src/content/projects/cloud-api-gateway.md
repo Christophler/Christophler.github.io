@@ -1,13 +1,14 @@
 ---
 title: Cloud API Gateway
-description: Unified internal API layer that cut duplicate integrations across three product teams.
+description: Unified an internal API layer so three product teams stopped shipping duplicate auth and error-handling clients.
 date: 2024-06-01
-updated: 2024-09-15
+updated: 2025-03-01
 featured: true
 stack:
   - FastAPI
   - Azure Functions
   - PostgreSQL
+  - OpenAPI
 relatedTags:
   - api
   - azure
@@ -16,33 +17,55 @@ relatedTags:
 
 ## Context
 
-Three product teams each maintained their own integrations to shared internal services. Duplicated auth, inconsistent error handling, and slow onboarding for new consumers.
+Three product teams each maintained their own HTTP clients against shared internal services. Auth headers, retry policy, and error shapes drifted over time. New consumers spent days reverse-engineering someone else's client instead of reading a single contract.
 
 ## Role
 
-Solo backend engineer — designed the gateway contract, implemented the service, and owned the first production deploy.
+Backend owner for the gateway — designed the public contract, implemented the service, and ran the first production rollout with the consuming teams.
 
 ## Architecture
 
-FastAPI gateway in front of existing services, with Azure Functions for async fan-out and PostgreSQL for idempotency keys and audit metadata.
+```text
+  [ Team A / B / C apps ]
+            |
+            v
+     [ API Gateway ]
+      FastAPI + auth
+            |
+     -------+-------
+     |             |
+     v             v
+ [ Core APIs ]  [ Azure Functions ]
+                async fan-out
+            |
+            v
+       [ PostgreSQL ]
+    idempotency + audit
+```
+
+Outbound calls stay behind the gateway. Idempotency keys and request audit metadata live in PostgreSQL so retries are safe and supportable.
 
 ## Implementation
 
-- Centralized auth and rate limiting at the edge
-- Versioned OpenAPI contract shared with consumer teams
-- Structured logging and request IDs for cross-service traces
+- Centralized auth validation and basic rate limiting at the edge
+- Versioned OpenAPI document as the source of truth for consumers
+- Structured logs with a request ID propagated to downstream services
+- Azure Functions for fan-out work that does not need to block the HTTP response
+
+> **Decision:** Prefer a thin gateway over a full mesh for v1. Three teams needed a single contract quickly; service mesh complexity would have delayed the win.
 
 ## Outcome
 
-- One integration path for three teams instead of three parallel clients
-- Faster consumer onboarding via a single documented API surface
-- Clearer operational ownership for failures and retries
+- One integration path instead of three parallel clients
+- Faster onboarding for a new consumer via the OpenAPI doc and a short runbook
+- Clearer ownership when failures happen — gateway logs and IDs, not three different client stacks
 
 ## What I'd improve
 
-- Add contract tests in CI against the OpenAPI spec
-- Expand canary deploys before full traffic shifts
+- Contract tests in CI against the published OpenAPI spec
+- Canary deploys before shifting 100% of traffic
+- Explicit SLOs for p95 latency and error rate on the gateway route
 
 ## How to run locally
 
-Docker Compose brings up the gateway, a stub downstream service, and PostgreSQL. See the project README when the repo is linked.
+Docker Compose brings up the gateway, a stub downstream service, and PostgreSQL. Point consumers at the local OpenAPI URL, then exercise happy-path and retry cases with the sample idempotency key header.

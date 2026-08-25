@@ -1,8 +1,8 @@
 ---
 title: Azure Function Diagnostics
-description: Traced production timeouts with structured logging and Application Insights dashboards.
+description: Built the instrumentation and dashboards that turned intermittent Function timeouts into a measurable dependency problem.
 date: 2024-08-10
-updated: 2024-11-02
+updated: 2025-03-01
 featured: true
 stack:
   - Azure Functions
@@ -16,33 +16,49 @@ relatedTags:
 
 ## Context
 
-A production Azure Function began timing out under load. Symptoms showed up as intermittent 500s for callers with little signal in the default logs.
+An HTTP-triggered Azure Function started timing out under load. Callers saw intermittent failures. Host logs showed start and stop events without enough signal to name the slow dependency.
 
 ## Role
 
-Investigated the timeout path, improved instrumentation, and documented the root cause for the team.
+Led the investigation end to end — reproduced the issue, added instrumentation, built the dashboards, and wrote the on-call runbook. The narrative writeup of the debugging method lives under Writeups.
 
 ## Architecture
 
-Python Azure Function triggered by HTTP, calling downstream dependencies. Telemetry routed through Application Insights.
+```text
+  [ Caller ]
+      |
+      v
+  [ Azure Function (Python, HTTP) ]
+      |
+      +-- dependency A (sync)
+      +-- dependency B (sync)
+      |
+      v
+  [ Application Insights ]
+   duration · failures · deps
+```
 
 ## Implementation
 
-- Added structured logs with correlation IDs
-- Built dashboards for duration, dependency calls, and failure rates
-- Reproduced the slow path locally with representative payloads
+- Structured logs with a correlation ID on every dependency call
+- Custom metrics for dependency duration alongside success/failure counts
+- Staging reproduction with production-shaped payloads (no production secrets in fixtures)
+- Shared Kusto queries for p95 duration and dependency failures
+
+> **Decision:** Instrument first, then optimize. Without duration signals, "make it faster" would have been guessing.
 
 ## Outcome
 
-- Identified a blocking dependency call as the primary timeout source
-- Reduced time-to-diagnosis for similar incidents with reusable queries
-- Documented a runbook for on-call engineers
+- Identified a blocking dependency / connection-pool wait as the primary timeout source
+- Cut time-to-diagnosis for similar incidents by keeping the queries and runbook next to the service
+- Gave on-call a concrete "what to check first" path instead of reading raw host logs
 
 ## What I'd improve
 
-- Add synthetic checks for the critical dependency
-- Automate alert thresholds from the new dashboards
+- Synthetic checks against the critical dependency
+- Alerting on p95 latency, not only hard failures
+- Automatic capture of correlation IDs in the alert payload
 
 ## How to run locally
 
-Use Azure Functions Core Tools with the sample function app and a local Application Insights connection string for development only.
+Use Azure Functions Core Tools with a sample function app. For telemetry locally, use a development Application Insights resource — never commit instrumentation keys.

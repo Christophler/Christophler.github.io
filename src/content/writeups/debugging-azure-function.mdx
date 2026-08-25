@@ -1,8 +1,8 @@
 ---
 title: Tracing a production timeout in an Azure Function
-description: How structured logging and Application Insights narrowed a flaky production timeout to a blocking dependency call.
+description: A practical debugging path from vague host logs to a blocking dependency — using correlation IDs, duration metrics, and reusable queries.
 date: 2024-10-12
-updated: 2024-11-18
+updated: 2025-03-01
 tags:
   - azure
   - debugging
@@ -11,15 +11,19 @@ platform: Azure
 difficulty: medium
 ---
 
+import Spoiler from '../../components/Spoiler.astro';
+
 ## What broke
 
-Callers started seeing intermittent timeouts from an HTTP-triggered Azure Function. Default logs showed the function starting and stopping without a clear failure reason.
+Callers reported intermittent timeouts from an HTTP-triggered Azure Function. Default host logs showed the function starting and completing (or dying) without a clear story about *which* dependency ate the budget.
+
+Symptoms looked random until we charted duration under load.
 
 ## Approach
 
 1. Reproduce with a representative payload in a staging slot
-2. Add structured logs with a correlation ID on every dependency call
-3. Compare duration distributions in Application Insights before and after the change
+2. Add structured logs and a correlation ID on every dependency call
+3. Compare duration distributions in Application Insights before blaming application logic
 
 ```python
 import logging
@@ -31,19 +35,38 @@ def main(req):
         "request.start",
         extra={"correlation_id": correlation_id, "route": req.url},
     )
-    # ... call dependencies with the same correlation_id
+    # Pass correlation_id into every dependency call and log duration on return.
 ```
 
 ## Root cause
 
-A synchronous call to a downstream service was waiting on a connection pool under load. The function host hit its timeout before the dependency returned.
+A synchronous downstream call waited on a saturated connection pool. The Function host hit its timeout before the dependency returned. Success/failure rates alone did not show the pain — **duration** did.
 
 ## Takeaways
 
 - Prefer dependency duration metrics over only success/failure counts
-- Correlation IDs make cross-service traces usable under pressure
-- Document the query that found the issue so the next on-call person does not start from zero
+- Correlation IDs make cross-service traces usable when an incident is live
+- Write down the query that found the issue so the next on-call person does not start from zero
+
+## Example query shape
+
+Sanitized example of the kind of query that helped — adjust table and field names to your workspace:
+
+```kusto
+requests
+| where timestamp > ago(1h)
+| where name == "YourFunctionName"
+| summarize
+    p50 = percentile(duration, 50),
+    p95 = percentile(duration, 95),
+    failures = countif(success == false)
+    by bin(timestamp, 5m)
+```
+
+<Spoiler title="Deeper checks (optional)">
+If p95 climbs while failure count stays flat, inspect dependency calls next — connection pool waits, DNS, or retries that amplify latency without flipping `success` to false. Keep secrets and connection strings out of screenshots and committed fixtures.
+</Spoiler>
 
 ## What I'd change next
 
-Add a synthetic check against the critical dependency and alert when p95 latency crosses a known-good baseline.
+Add a synthetic check against the critical dependency and alert when p95 crosses a known-good baseline — not only when hard errors spike.

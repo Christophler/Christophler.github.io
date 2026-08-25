@@ -714,6 +714,34 @@ p {
   opacity: 0;
 }
 
+.spoiler {
+  margin: 1.25rem 0;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: 0.75rem 1rem;
+  background: var(--color-bg-elevated);
+}
+
+.spoiler summary {
+  cursor: pointer;
+  font-weight: 500;
+  color: var(--color-text);
+}
+
+.spoiler-body {
+  margin-top: 0.75rem;
+  color: var(--color-text-muted);
+  font-size: 0.9375rem;
+}
+
+.spoiler-body > :first-child {
+  margin-top: 0;
+}
+
+.spoiler-body > :last-child {
+  margin-bottom: 0;
+}
+
 .prose h2:hover .heading-anchor,
 .prose h3:hover .heading-anchor,
 .prose .heading-anchor:focus-visible {
