@@ -1,9 +1,7 @@
 # Link check for the built static site (./dist).
 # Fail on broken internal paths; exclude flaky external hosts.
 
-verbose = false
-no_progress = true
-max_redirects = 5
+no_progress = truemax_redirects = 5
 timeout = 20
 max_concurrency = 8
 
