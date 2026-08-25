@@ -10,17 +10,16 @@
     "astro": "astro"
   },
   "dependencies": {
-    "@astrojs/mdx": "^4.3.14",
+    "@astrojs/mdx": "^7.0.8",
     "@fontsource/plus-jakarta-sans": "^5.2.0",
-    "astro": "^5.7.0",
+    "astro": "^7.2.6",
     "reading-time": "^1.5.0",
     "rehype-autolink-headings": "^7.1.0",
     "rehype-slug": "^6.0.0",
-    "remark-gfm": "^4.0.1",
     "yaml": "^2.8.0"
   },
   "devDependencies": {
-    "@astrojs/check": "^0.9.0",
+    "@astrojs/check": "^0.9.10",
     "typescript": "^5.8.0"
   }
 }
