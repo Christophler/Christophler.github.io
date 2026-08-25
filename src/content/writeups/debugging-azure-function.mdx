@@ -21,6 +21,19 @@ Callers started seeing intermittent timeouts from an HTTP-triggered Azure Functi
 2. Add structured logs with a correlation ID on every dependency call
 3. Compare duration distributions in Application Insights before and after the change
 
+```python
+import logging
+import uuid
+
+def main(req):
+    correlation_id = req.headers.get("x-correlation-id") or str(uuid.uuid4())
+    logging.info(
+        "request.start",
+        extra={"correlation_id": correlation_id, "route": req.url},
+    )
+    # ... call dependencies with the same correlation_id
+```
+
 ## Root cause
 
 A synchronous call to a downstream service was waiting on a connection pool under load. The function host hit its timeout before the dependency returned.

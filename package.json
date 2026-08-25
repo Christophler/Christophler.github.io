@@ -10,6 +10,7 @@
     "astro": "astro"
   },
   "dependencies": {
+    "@astrojs/mdx": "^4.3.14",
     "@fontsource/plus-jakarta-sans": "^5.2.0",
     "astro": "^5.7.0",
     "yaml": "^2.8.0"

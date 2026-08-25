@@ -380,6 +380,72 @@ p {
   gap: 0.25rem;
 }
 
+.writeup {
+  max-width: var(--content-prose);
+}
+
+.writeup-header {
+  margin-bottom: 2.5rem;
+}
+
+.writeup-back {
+  margin: 0 0 1rem;
+  font-size: 0.875rem;
+}
+
+.writeup-back a {
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.writeup-header h1 {
+  margin: 0 0 0.75rem;
+  font-size: clamp(1.75rem, 4vw, 2.25rem);
+}
+
+.writeup-description {
+  margin: 0 0 1rem;
+  color: var(--color-text-muted);
+  font-size: 1.0625rem;
+  max-width: none;
+}
+
+.writeup-meta {
+  margin: 1rem 0 0;
+}
+
+.writeup-meta .last-updated {
+  margin: 0;
+}
+
+.writeup-meta-extra {
+  margin: 0.35rem 0 0;
+  color: var(--color-text-muted);
+  font-size: 0.875rem;
+  max-width: none;
+  text-transform: capitalize;
+}
+
+.writeup-header .writeup-card-tags {
+  margin-top: 1rem;
+}
+
+.prose pre {
+  margin: 0 0 1.25rem;
+  padding: 1rem 1.15rem;
+  overflow-x: auto;
+  border-radius: var(--radius-md);
+  font-size: 0.875rem;
+  line-height: 1.6;
+}
+
+.prose pre code {
+  background: none;
+  padding: 0;
+  border-radius: 0;
+  font-size: inherit;
+}
+
 .landing-section,
 .pillars,
 .skills,

@@ -1,0 +1,51 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import LastUpdated from '../components/LastUpdated.astro';
+import BaseLayout from './BaseLayout.astro';
+import { site } from '../data/site';
+
+interface Props {
+  writeup: CollectionEntry<'writeups'>;
+}
+
+const { writeup } = Astro.props;
+const { title, description, tags, platform, difficulty, date, updated } =
+  writeup.data;
+---
+
+<BaseLayout title={`${title} · ${site.name}`} description={description}>
+  <article class="writeup">
+    <header class="writeup-header">
+      <p class="writeup-back">
+        <a href="/writeups">← Writeups</a>
+      </p>
+      <h1>{title}</h1>
+      <p class="writeup-description">{description}</p>
+      <div class="writeup-meta">
+        <LastUpdated date={date} updated={updated} />
+        {
+          (platform || difficulty) && (
+            <p class="writeup-meta-extra">
+              {platform && <span>{platform}</span>}
+              {platform && difficulty && <span aria-hidden="true"> · </span>}
+              {difficulty && <span class="writeup-difficulty">{difficulty}</span>}
+            </p>
+          )
+        }
+      </div>
+      {
+        tags.length > 0 && (
+          <ul class="writeup-card-tags" aria-label="Tags">
+            {tags.map((tag) => (
+              <li>{tag}</li>
+            ))}
+          </ul>
+        )
+      }
+    </header>
+
+    <div class="writeup-body prose">
+      <slot />
+    </div>
+  </article>
+</BaseLayout>
