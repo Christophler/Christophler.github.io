@@ -1,8 +1,8 @@
 ---
-import type { FeaturedProject } from '../data/featured-projects';
+import type { CollectionEntry } from 'astro:content';
 
 interface Props {
-  project: FeaturedProject;
+  project: CollectionEntry<'projects'>;
 }
 
 const { project } = Astro.props;
@@ -10,12 +10,12 @@ const { project } = Astro.props;
 
 <article class="project-card">
   <h3>
-    <a href={`/projects/${project.slug}`}>{project.title}</a>
+    <a href={`/projects/${project.id}`}>{project.data.title}</a>
   </h3>
-  <p>{project.description}</p>
+  <p>{project.data.description}</p>
   <ul class="project-card-stack" aria-label="Tech stack">
     {
-      project.stack.map((tag) => (
+      project.data.stack.map((tag) => (
         <li>{tag}</li>
       ))
     }

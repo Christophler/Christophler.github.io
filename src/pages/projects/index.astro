@@ -1,8 +1,12 @@
 ---
+import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import ProjectCard from '../../components/ProjectCard.astro';
-import { featuredProjects } from '../../data/featured-projects';
 import { site } from '../../data/site';
+
+const projects = (
+  await getCollection('projects', ({ data }) => !data.draft)
+).sort((a, b) => b.data.updated.valueOf() - a.data.updated.valueOf());
 ---
 
 <BaseLayout
@@ -16,7 +20,7 @@ import { site } from '../../data/site';
 
   <ul class="featured-projects-grid">
     {
-      featuredProjects.map((project) => (
+      projects.map((project) => (
         <li>
           <ProjectCard project={project} />
         </li>

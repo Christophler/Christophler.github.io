@@ -1,13 +1,17 @@
 ---
-import { featuredProjects } from '../data/featured-projects';
+import { getCollection } from 'astro:content';
 import ProjectCard from './ProjectCard.astro';
+
+const projects = (
+  await getCollection('projects', ({ data }) => data.featured && !data.draft)
+).sort((a, b) => b.data.updated.valueOf() - a.data.updated.valueOf());
 ---
 
 <section class="featured-projects" aria-labelledby="featured-projects-heading">
   <h2 id="featured-projects-heading">Featured projects</h2>
   <ul class="featured-projects-grid">
     {
-      featuredProjects.map((project) => (
+      projects.map((project) => (
         <li>
           <ProjectCard project={project} />
         </li>
