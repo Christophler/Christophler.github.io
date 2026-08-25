@@ -1,0 +1,91 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { getCollection } from 'astro:content';
+import BaseLayout from './BaseLayout.astro';
+import { site } from '../data/site';
+
+interface Props {
+  project: CollectionEntry<'projects'>;
+}
+
+const { project } = Astro.props;
+const { title, description, stack, github, relatedTags, date, updated } =
+  project.data;
+
+const related =
+  relatedTags && relatedTags.length > 0
+    ? (
+        await getCollection(
+          'projects',
+          (entry) =>
+            entry.id !== project.id &&
+            !entry.data.draft &&
+            (entry.data.relatedTags ?? []).some((tag) =>
+              relatedTags.includes(tag),
+            ),
+        )
+      )
+        .sort((a, b) => b.data.updated.valueOf() - a.data.updated.valueOf())
+        .slice(0, 3)
+    : [];
+
+const dateFormatter = new Intl.DateTimeFormat('en-US', {
+  year: 'numeric',
+  month: 'short',
+  day: 'numeric',
+});
+---
+
+<BaseLayout title={`${title} · ${site.name}`} description={description}>
+  <article class="case-study">
+    <header class="case-study-header">
+      <p class="case-study-back">
+        <a href="/projects">← Projects</a>
+      </p>
+      <h1>{title}</h1>
+      <p class="case-study-description">{description}</p>
+      <ul class="project-card-stack" aria-label="Tech stack">
+        {stack.map((tag) => <li>{tag}</li>)}
+      </ul>
+      <p class="case-study-meta">
+        <span>Published {dateFormatter.format(date)}</span>
+        {
+          updated.valueOf() !== date.valueOf() && (
+            <span> · Updated {dateFormatter.format(updated)}</span>
+          )
+        }
+        {
+          github && (
+            <>
+              {' '}
+              ·{' '}
+              <a href={github} target="_blank" rel="noopener noreferrer">
+                GitHub
+              </a>
+            </>
+          )
+        }
+      </p>
+    </header>
+
+    <div class="case-study-body prose">
+      <slot />
+    </div>
+
+    {
+      related.length > 0 && (
+        <aside class="case-study-related" aria-labelledby="related-heading">
+          <h2 id="related-heading">Related projects</h2>
+          <ul class="plain-list">
+            {related.map((entry) => (
+              <li>
+                <a href={`/projects/${entry.id}`}>{entry.data.title}</a>
+                <span class="plain-list-muted">{entry.data.description}</span>
+              </li>
+            ))}
+          </ul>
+        </aside>
+      )
+    }
+  </article>
+</BaseLayout>
