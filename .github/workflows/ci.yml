@@ -20,3 +20,8 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npm run build
+      - name: Link check
+        uses: lycheeverse/lychee-action@v2
+        with:
+          args: --config lychee.toml ./dist
+          fail: true

@@ -1,0 +1,26 @@
+# Link check for the built static site (./dist).
+# Fail on broken internal paths; exclude flaky external hosts.
+
+verbose = false
+no_progress = true
+max_redirects = 5
+timeout = 20
+max_concurrency = 8
+
+# Accept common success / soft-fail statuses
+accept = ["200", "204", "206", "429"]
+
+# Resolve site-root absolute paths (e.g. /projects/) against the build output
+root_dir = "./dist"
+
+# Skip mailto and hosts that often rate-limit or block CI bots
+exclude = [
+  '^mailto:',
+  '^https://(www\.)?linkedin\.com',
+  '^https://(www\.)?credly\.com',
+]
+
+# Don't treat the custom 404 page as a normal crawl target
+exclude_path = ['404\\.html$']
+
+include_verbatim = false

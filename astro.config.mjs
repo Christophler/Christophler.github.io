@@ -13,7 +13,12 @@ export default defineConfig({
     prefetchAll: false,
     defaultStrategy: 'hover',
   },
-  integrations: [mdx(), sitemap()],
+  integrations: [
+    mdx(),
+    sitemap({
+      filter: (page) => !page.includes('/404'),
+    }),
+  ],
   markdown: {
     shikiConfig: {
       theme: 'github-dark-default',
