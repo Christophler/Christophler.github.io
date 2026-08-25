@@ -1,0 +1,38 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import WriteupCard from '../../components/WriteupCard.astro';
+import { site } from '../../data/site';
+
+const writeups = (await getCollection('writeups', ({ data }) => !data.draft)).sort(
+  (a, b) => {
+    const aDate = a.data.updated ?? a.data.date;
+    const bDate = b.data.updated ?? b.data.date;
+    return bDate.valueOf() - aDate.valueOf();
+  },
+);
+---
+
+<BaseLayout
+  title={`Writeups · ${site.name}`}
+  description="Engineering notes on cloud, debugging, and reliable systems."
+>
+  <section class="page-header">
+    <h1>Writeups</h1>
+    <p>Engineering notes on debugging, cloud operations, and reliable systems.</p>
+  </section>
+
+  {
+    writeups.length > 0 ? (
+      <ul class="writeup-list">
+        {writeups.map((writeup) => (
+          <li>
+            <WriteupCard writeup={writeup} />
+          </li>
+        ))}
+      </ul>
+    ) : (
+      <p class="empty-state">No writeups published yet.</p>
+    )
+  }
+</BaseLayout>

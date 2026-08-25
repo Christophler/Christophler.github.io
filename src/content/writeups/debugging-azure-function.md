@@ -1,0 +1,36 @@
+---
+title: Tracing a production timeout in an Azure Function
+description: How structured logging and Application Insights narrowed a flaky production timeout to a blocking dependency call.
+date: 2024-10-12
+updated: 2024-11-18
+tags:
+  - azure
+  - debugging
+  - serverless
+platform: Azure
+difficulty: medium
+---
+
+## What broke
+
+Callers started seeing intermittent timeouts from an HTTP-triggered Azure Function. Default logs showed the function starting and stopping without a clear failure reason.
+
+## Approach
+
+1. Reproduce with a representative payload in a staging slot
+2. Add structured logs with a correlation ID on every dependency call
+3. Compare duration distributions in Application Insights before and after the change
+
+## Root cause
+
+A synchronous call to a downstream service was waiting on a connection pool under load. The function host hit its timeout before the dependency returned.
+
+## Takeaways
+
+- Prefer dependency duration metrics over only success/failure counts
+- Correlation IDs make cross-service traces usable under pressure
+- Document the query that found the issue so the next on-call person does not start from zero
+
+## What I'd change next
+
+Add a synthetic check against the critical dependency and alert when p95 latency crosses a known-good baseline.

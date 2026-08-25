@@ -1,4 +1,5 @@
 ---
+import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import CredibilityStrip from '../components/CredibilityStrip.astro';
 import FeaturedProjects from '../components/FeaturedProjects.astro';
@@ -19,13 +20,20 @@ const experienceSnapshot = [
   },
 ];
 
-const writeupTeasers = [
-  {
-    title: 'Tracing a production timeout in an Azure Function',
-    date: '2024-11',
-    href: '/writeups/debugging-azure-function',
-  },
-];
+const dateFormatter = new Intl.DateTimeFormat('en-US', {
+  year: 'numeric',
+  month: 'short',
+});
+
+const writeupTeasers = (
+  await getCollection('writeups', ({ data }) => !data.draft)
+)
+  .sort((a, b) => {
+    const aDate = a.data.updated ?? a.data.date;
+    const bDate = b.data.updated ?? b.data.date;
+    return bDate.valueOf() - aDate.valueOf();
+  })
+  .slice(0, 3);
 ---
 
 <BaseLayout>
@@ -67,12 +75,15 @@ const writeupTeasers = [
     <h2 id="writeups-teaser-heading">Writeups</h2>
     <ul class="plain-list">
       {
-        writeupTeasers.map((post) => (
-          <li>
-            <a href={post.href}>{post.title}</a>
-            <span class="plain-list-muted">{post.date}</span>
-          </li>
-        ))
+        writeupTeasers.map((post) => {
+          const sortDate = post.data.updated ?? post.data.date;
+          return (
+            <li>
+              <a href={`/writeups/${post.id}`}>{post.data.title}</a>
+              <span class="plain-list-muted">{dateFormatter.format(sortDate)}</span>
+            </li>
+          );
+        })
       }
     </ul>
     <p class="section-link">

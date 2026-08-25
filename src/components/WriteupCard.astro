@@ -1,0 +1,30 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import LastUpdated from './LastUpdated.astro';
+
+interface Props {
+  writeup: CollectionEntry<'writeups'>;
+}
+
+const { writeup } = Astro.props;
+const sortDate = writeup.data.updated ?? writeup.data.date;
+---
+
+<article class="writeup-card">
+  <div class="writeup-card-main">
+    <h3>
+      <a href={`/writeups/${writeup.id}`}>{writeup.data.title}</a>
+    </h3>
+    <p>{writeup.data.description}</p>
+    {
+      writeup.data.tags.length > 0 && (
+        <ul class="writeup-card-tags" aria-label="Tags">
+          {writeup.data.tags.map((tag) => (
+            <li>{tag}</li>
+          ))}
+        </ul>
+      )
+    }
+  </div>
+  <LastUpdated date={writeup.data.date} updated={sortDate} compact />
+</article>

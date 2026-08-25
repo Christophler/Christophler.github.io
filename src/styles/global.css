@@ -253,6 +253,63 @@ p {
   margin-top: 1rem;
 }
 
+.writeup-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.writeup-card {
+  display: grid;
+  gap: 0.75rem;
+  padding-block: 1.25rem;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.writeup-list > li:first-child .writeup-card {
+  border-top: 1px solid var(--color-border);
+}
+
+.writeup-card-main h3 {
+  margin: 0 0 0.35rem;
+  font-size: 1.0625rem;
+}
+
+.writeup-card-main h3 a {
+  color: var(--color-text);
+  text-decoration: none;
+}
+
+.writeup-card-main h3 a:hover {
+  color: var(--color-accent);
+}
+
+.writeup-card-main p {
+  margin: 0;
+  color: var(--color-text-muted);
+  font-size: 0.9375rem;
+  max-width: none;
+}
+
+.writeup-card-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  list-style: none;
+  margin: 0.75rem 0 0;
+  padding: 0;
+  font-size: 0.8125rem;
+  color: var(--color-text-muted);
+}
+
+.writeup-card .last-updated--compact {
+  margin-top: 0;
+}
+
+.empty-state {
+  color: var(--color-text-muted);
+}
+
 .prose {
   line-height: 1.7;
 }

@@ -18,4 +18,18 @@ const projects = defineCollection({
   }),
 });
 
-export const collections = { projects };
+const writeups = defineCollection({
+  loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/writeups' }),
+  schema: z.object({
+    title: z.string(),
+    description: z.string(),
+    date: z.coerce.date(),
+    updated: z.coerce.date(),
+    tags: z.array(z.string()),
+    platform: z.string().optional(),
+    difficulty: z.enum(['easy', 'medium', 'hard']).optional(),
+    draft: z.boolean().default(false),
+  }),
+});
+
+export const collections = { projects, writeups };
