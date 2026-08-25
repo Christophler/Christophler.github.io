@@ -1,20 +1,29 @@
 ---
 import type { CollectionEntry } from 'astro:content';
+import type { MarkdownHeading } from 'astro';
 import LastUpdated from '../components/LastUpdated.astro';
+import ReadingProgress from '../components/ReadingProgress.astro';
+import TableOfContents from '../components/TableOfContents.astro';
 import BaseLayout from './BaseLayout.astro';
 import { site } from '../data/site';
 
 interface Props {
   writeup: CollectionEntry<'writeups'>;
+  headings: MarkdownHeading[];
+  readingMinutes: number;
 }
 
-const { writeup } = Astro.props;
+const { writeup, headings, readingMinutes } = Astro.props;
 const { title, description, tags, platform, difficulty, date, updated } =
   writeup.data;
+
+const minutesLabel =
+  readingMinutes <= 1 ? '1 min read' : `${readingMinutes} min read`;
 ---
 
 <BaseLayout title={`${title} · ${site.name}`} description={description}>
-  <article class="writeup">
+  <ReadingProgress />
+  <article class="writeup writeup--with-toc">
     <header class="writeup-header">
       <p class="writeup-back">
         <a href="/writeups">← Writeups</a>
@@ -23,15 +32,19 @@ const { title, description, tags, platform, difficulty, date, updated } =
       <p class="writeup-description">{description}</p>
       <div class="writeup-meta">
         <LastUpdated date={date} updated={updated} />
-        {
-          (platform || difficulty) && (
-            <p class="writeup-meta-extra">
-              {platform && <span>{platform}</span>}
-              {platform && difficulty && <span aria-hidden="true"> · </span>}
-              {difficulty && <span class="writeup-difficulty">{difficulty}</span>}
-            </p>
-          )
-        }
+        <p class="writeup-meta-extra">
+          <span>{minutesLabel}</span>
+          {
+            (platform || difficulty) && (
+              <>
+                <span aria-hidden="true"> · </span>
+                {platform && <span>{platform}</span>}
+                {platform && difficulty && <span aria-hidden="true"> · </span>}
+                {difficulty && <span class="writeup-difficulty">{difficulty}</span>}
+              </>
+            )
+          }
+        </p>
       </div>
       {
         tags.length > 0 && (
@@ -44,8 +57,11 @@ const { title, description, tags, platform, difficulty, date, updated } =
       }
     </header>
 
-    <div class="writeup-body prose">
-      <slot />
+    <div class="writeup-layout">
+      <TableOfContents headings={headings} />
+      <div class="writeup-body prose">
+        <slot />
+      </div>
     </div>
   </article>
 </BaseLayout>

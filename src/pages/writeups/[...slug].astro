@@ -1,6 +1,7 @@
 ---
 import { getCollection, render } from 'astro:content';
 import type { CollectionEntry } from 'astro:content';
+import getReadingTime from 'reading-time';
 import WriteupLayout from '../../layouts/WriteupLayout.astro';
 
 export async function getStaticPaths() {
@@ -17,9 +18,15 @@ interface Props {
 }
 
 const { writeup } = Astro.props;
-const { Content } = await render(writeup);
+const { Content, headings } = await render(writeup);
+const reading = getReadingTime(writeup.body ?? '');
+const readingMinutes = Math.max(1, Math.round(reading.minutes));
 ---
 
-<WriteupLayout writeup={writeup}>
+<WriteupLayout
+  writeup={writeup}
+  headings={headings}
+  readingMinutes={readingMinutes}
+>
   <Content />
 </WriteupLayout>
