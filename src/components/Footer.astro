@@ -1,5 +1,6 @@
 ---
 import type { SiteConfig } from '../data/site';
+import ExternalLink from './ExternalLink.astro';
 
 interface Props {
   site: SiteConfig;
@@ -13,9 +14,9 @@ const year = new Date().getFullYear();
   <p>
     <a href={`mailto:${site.email}`}>{site.email}</a>
     ·
-    <a href={site.github} target="_blank" rel="noopener noreferrer">GitHub</a>
+    <ExternalLink href={site.github}>GitHub</ExternalLink>
     ·
-    <a href={site.linkedin} target="_blank" rel="noopener noreferrer">LinkedIn</a>
+    <ExternalLink href={site.linkedin}>LinkedIn</ExternalLink>
   </p>
   <p>© {year} {site.name}. All rights reserved.</p>
   <p>{site.title}</p>

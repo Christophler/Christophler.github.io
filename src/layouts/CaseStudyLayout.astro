@@ -1,6 +1,8 @@
 ---
 import type { CollectionEntry } from 'astro:content';
 import { getCollection } from 'astro:content';
+import ExternalLink from '../components/ExternalLink.astro';
+import InternalLink from '../components/InternalLink.astro';
 import LastUpdated from '../components/LastUpdated.astro';
 import BaseLayout from './BaseLayout.astro';
 import { site } from '../data/site';
@@ -35,7 +37,7 @@ const related =
   <article class="case-study">
     <header class="case-study-header">
       <p class="case-study-back">
-        <a href="/projects">← Projects</a>
+        <InternalLink href="/projects">← Projects</InternalLink>
       </p>
       <h1>{title}</h1>
       <p class="case-study-description">{description}</p>
@@ -47,9 +49,7 @@ const related =
         {
           github && (
             <p class="case-study-github">
-              <a href={github} target="_blank" rel="noopener noreferrer">
-                View on GitHub
-              </a>
+              <ExternalLink href={github}>View on GitHub</ExternalLink>
             </p>
           )
         }
@@ -67,7 +67,7 @@ const related =
           <ul class="plain-list">
             {related.map((entry) => (
               <li>
-                <a href={`/projects/${entry.id}`}>{entry.data.title}</a>
+                <InternalLink href={`/projects/${entry.id}`}>{entry.data.title}</InternalLink>
                 <span class="plain-list-muted">{entry.data.description}</span>
               </li>
             ))}

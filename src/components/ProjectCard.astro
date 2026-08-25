@@ -1,5 +1,6 @@
 ---
 import type { CollectionEntry } from 'astro:content';
+import InternalLink from './InternalLink.astro';
 import LastUpdated from './LastUpdated.astro';
 
 interface Props {
@@ -11,7 +12,7 @@ const { project } = Astro.props;
 
 <article class="project-card">
   <h3>
-    <a href={`/projects/${project.id}`}>{project.data.title}</a>
+    <InternalLink href={`/projects/${project.id}`}>{project.data.title}</InternalLink>
   </h3>
   <p>{project.data.description}</p>
   <ul class="project-card-stack" aria-label="Tech stack">

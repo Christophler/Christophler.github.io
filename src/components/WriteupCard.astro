@@ -1,5 +1,6 @@
 ---
 import type { CollectionEntry } from 'astro:content';
+import InternalLink from './InternalLink.astro';
 import LastUpdated from './LastUpdated.astro';
 
 interface Props {
@@ -13,7 +14,7 @@ const sortDate = writeup.data.updated ?? writeup.data.date;
 <article class="writeup-card">
   <div class="writeup-card-main">
     <h3>
-      <a href={`/writeups/${writeup.id}`}>{writeup.data.title}</a>
+      <InternalLink href={`/writeups/${writeup.id}`}>{writeup.data.title}</InternalLink>
     </h3>
     <p>{writeup.data.description}</p>
     {

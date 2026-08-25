@@ -1,6 +1,7 @@
 ---
 import type { CollectionEntry } from 'astro:content';
 import type { MarkdownHeading } from 'astro';
+import InternalLink from '../components/InternalLink.astro';
 import LastUpdated from '../components/LastUpdated.astro';
 import ReadingProgress from '../components/ReadingProgress.astro';
 import TableOfContents from '../components/TableOfContents.astro';
@@ -26,7 +27,7 @@ const minutesLabel =
   <article class="writeup writeup--with-toc">
     <header class="writeup-header">
       <p class="writeup-back">
-        <a href="/writeups">← Writeups</a>
+        <InternalLink href="/writeups">← Writeups</InternalLink>
       </p>
       <h1>{title}</h1>
       <p class="writeup-description">{description}</p>

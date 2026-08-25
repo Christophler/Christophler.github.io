@@ -8,6 +8,10 @@ export default defineConfig({
   site: 'https://christophler.github.io',
   base: '/',
   output: 'static',
+  prefetch: {
+    prefetchAll: false,
+    defaultStrategy: 'hover',
+  },
   integrations: [mdx()],
   markdown: {
     shikiConfig: {

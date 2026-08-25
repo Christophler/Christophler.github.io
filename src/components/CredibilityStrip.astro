@@ -1,9 +1,10 @@
 ---
 import { jobSearch } from '../data/job-search';
+import InternalLink from './InternalLink.astro';
 ---
 
 <p class="credibility-strip">
   {jobSearch.landingOneLiner}
   <span class="credibility-strip-sep" aria-hidden="true">·</span>
-  <a href="/experience#availability-heading">Availability details</a>
+  <InternalLink href="/experience#availability-heading">Availability details</InternalLink>
 </p>

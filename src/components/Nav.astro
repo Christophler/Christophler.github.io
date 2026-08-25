@@ -1,5 +1,6 @@
 ---
 import type { SiteConfig } from '../data/site';
+import InternalLink from './InternalLink.astro';
 import ThemeToggle from './ThemeToggle.astro';
 
 interface Props {
@@ -18,12 +19,12 @@ const navItems = [
 
 <header class="site-header" transition:persist="site-header">
   <nav aria-label="Main">
-    <a class="site-logo" href="/">{site.shortName}</a>
+    <InternalLink class="site-logo" href="/">{site.shortName}</InternalLink>
     <ul class="site-nav-links">
       {
         navItems.map((item) => (
           <li>
-            <a href={item.href}>{item.label}</a>
+            <InternalLink href={item.href}>{item.label}</InternalLink>
           </li>
         ))
       }

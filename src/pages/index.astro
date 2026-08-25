@@ -2,7 +2,9 @@
 import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import CredibilityStrip from '../components/CredibilityStrip.astro';
+import ExternalLink from '../components/ExternalLink.astro';
 import FeaturedProjects from '../components/FeaturedProjects.astro';
+import InternalLink from '../components/InternalLink.astro';
 import Pillars from '../components/Pillars.astro';
 import SkillsTags from '../components/SkillsTags.astro';
 import { experience, formatExperiencePeriod } from '../data/experience';
@@ -32,7 +34,7 @@ const writeupTeasers = (
     <p class="hero-role">{site.title}</p>
     <p class="hero-tagline">{site.tagline}</p>
     <p class="hero-cta">
-      <a href="/projects">View projects</a>
+      <InternalLink href="/projects">View projects</InternalLink>
       <span class="hero-cta-sep" aria-hidden="true">·</span>
       <a href={`mailto:${site.email}`}>Get in touch</a>
     </p>
@@ -57,7 +59,7 @@ const writeupTeasers = (
       }
     </ul>
     <p class="section-link">
-      <a href="/experience">Full experience & certifications</a>
+      <InternalLink href="/experience">Full experience & certifications</InternalLink>
     </p>
   </section>
 
@@ -69,7 +71,7 @@ const writeupTeasers = (
           const sortDate = post.data.updated ?? post.data.date;
           return (
             <li>
-              <a href={`/writeups/${post.id}`}>{post.data.title}</a>
+              <InternalLink href={`/writeups/${post.id}`}>{post.data.title}</InternalLink>
               <span class="plain-list-muted">{dateFormatter.format(sortDate)}</span>
             </li>
           );
@@ -77,7 +79,7 @@ const writeupTeasers = (
       }
     </ul>
     <p class="section-link">
-      <a href="/writeups">All writeups</a>
+      <InternalLink href="/writeups">All writeups</InternalLink>
     </p>
   </section>
 
@@ -89,9 +91,9 @@ const writeupTeasers = (
       Open to backend and cloud roles —
       <a href={`mailto:${site.email}`}>email</a>
       ·
-      <a href={site.linkedin} target="_blank" rel="noopener noreferrer">LinkedIn</a>
+      <ExternalLink href={site.linkedin}>LinkedIn</ExternalLink>
       ·
-      <a href={site.github} target="_blank" rel="noopener noreferrer">GitHub</a>
+      <ExternalLink href={site.github}>GitHub</ExternalLink>
     </p>
   </section>
 </BaseLayout>
