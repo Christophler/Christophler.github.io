@@ -1,6 +1,7 @@
 ---
 import type { CollectionEntry } from 'astro:content';
 import { getCollection } from 'astro:content';
+import LastUpdated from '../components/LastUpdated.astro';
 import BaseLayout from './BaseLayout.astro';
 import { site } from '../data/site';
 
@@ -28,12 +29,6 @@ const related =
         .sort((a, b) => b.data.updated.valueOf() - a.data.updated.valueOf())
         .slice(0, 3)
     : [];
-
-const dateFormatter = new Intl.DateTimeFormat('en-US', {
-  year: 'numeric',
-  month: 'short',
-  day: 'numeric',
-});
 ---
 
 <BaseLayout title={`${title} · ${site.name}`} description={description}>
@@ -47,25 +42,18 @@ const dateFormatter = new Intl.DateTimeFormat('en-US', {
       <ul class="project-card-stack" aria-label="Tech stack">
         {stack.map((tag) => <li>{tag}</li>)}
       </ul>
-      <p class="case-study-meta">
-        <span>Published {dateFormatter.format(date)}</span>
-        {
-          updated.valueOf() !== date.valueOf() && (
-            <span> · Updated {dateFormatter.format(updated)}</span>
-          )
-        }
+      <div class="case-study-meta">
+        <LastUpdated date={date} updated={updated} />
         {
           github && (
-            <>
-              {' '}
-              ·{' '}
+            <p class="case-study-github">
               <a href={github} target="_blank" rel="noopener noreferrer">
-                GitHub
+                View on GitHub
               </a>
-            </>
+            </p>
           )
         }
-      </p>
+      </div>
     </header>
 
     <div class="case-study-body prose">

@@ -1,0 +1,33 @@
+---
+interface Props {
+  date: Date;
+  updated: Date;
+  compact?: boolean;
+}
+
+const { date, updated, compact = false } = Astro.props;
+
+const dateFormatter = new Intl.DateTimeFormat('en-US', {
+  year: 'numeric',
+  month: 'short',
+  day: 'numeric',
+});
+
+const published = dateFormatter.format(date);
+const wasUpdated = updated.valueOf() !== date.valueOf();
+const updatedLabel = dateFormatter.format(updated);
+---
+
+<p class:list={['last-updated', compact && 'last-updated--compact']}>
+  {
+    wasUpdated ? (
+      <>
+        <span>Published {published}</span>
+        <span aria-hidden="true"> · </span>
+        <span>Updated {updatedLabel}</span>
+      </>
+    ) : (
+      <span>{compact ? `Updated ${published}` : `Published ${published}`}</span>
+    )
+  }
+</p>
