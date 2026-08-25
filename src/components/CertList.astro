@@ -1,0 +1,32 @@
+---
+import { certifications, formatCertDate } from '../data/certifications';
+---
+
+<section class="certifications" id="certifications" aria-labelledby="certifications-heading">
+  <h2 id="certifications-heading">Certifications</h2>
+  <ul class="cert-list">
+    {
+      certifications.map((cert) => (
+        <li class="cert-item">
+          <div class="cert-item-main">
+            <h3>{cert.name}</h3>
+            <p class="cert-item-meta">
+              {cert.issuer} · {cert.examCode} · Issued {formatCertDate(cert.issueDate)}
+              {cert.expiryDate
+                ? ` · Expires ${formatCertDate(cert.expiryDate)}`
+                : ' · No expiration'}
+            </p>
+          </div>
+          <a
+            class="cert-verify"
+            href={cert.verifyUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Verify credential
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+</section>

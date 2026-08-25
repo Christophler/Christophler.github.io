@@ -1,0 +1,22 @@
+certifications:
+  - name: "Microsoft Certified: Azure Fundamentals"
+    examCode: AZ-900
+    issuer: Microsoft
+    issueDate: 2023-02-04
+    expiryDate: null
+    credentialId: null
+    verifyUrl: https://www.credly.com/badges/3885cddf-3fc5-4a57-af46-9cc2bb78ee6f/public_url
+  - name: "Microsoft Certified: Azure AI Fundamentals"
+    examCode: AI-900
+    issuer: Microsoft
+    issueDate: 2023-03-11
+    expiryDate: null
+    credentialId: null
+    verifyUrl: https://www.credly.com/badges/e2a66a39-23f9-41c4-aa4a-c2a61f79d165/public_url
+  - name: "Microsoft Certified: Azure Data Fundamentals"
+    examCode: DP-900
+    issuer: Microsoft
+    issueDate: 2023-03-17
+    expiryDate: null
+    credentialId: null
+    verifyUrl: https://www.credly.com/badges/3237507b-9f86-4798-b25e-9ac0d3055011/public_url
