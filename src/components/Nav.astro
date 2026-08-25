@@ -16,7 +16,7 @@ const navItems = [
 ];
 ---
 
-<header class="site-header">
+<header class="site-header" transition:persist="site-header">
   <nav aria-label="Main">
     <a class="site-logo" href="/">{site.shortName}</a>
     <ul class="site-nav-links">
@@ -30,7 +30,7 @@ const navItems = [
     </ul>
     <div class="site-header-actions">
       {site.showOpenToWorkPill && <span class="open-to-work-pill">Open to work</span>}
-      <a class="nav-resume" href={site.resumePath} download>Resume</a>
+      <a class="nav-resume" href={site.resumePath} download data-astro-reload>Resume</a>
       <ThemeToggle />
     </div>
   </nav>

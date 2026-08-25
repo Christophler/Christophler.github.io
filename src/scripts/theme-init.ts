@@ -8,5 +8,5 @@ export function resolveTheme(preference: ThemePreference): 'light' | 'dark' {
   return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
 }
 
-/** Inlined in <head> before stylesheets to prevent theme FOUC. */
-export const themeInitScript = `(function(){try{var k='theme';var p=localStorage.getItem(k)||'system';var t=p==='dark'?'dark':p==='light'?'light':(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.dataset.theme=t;document.documentElement.dataset.themePreference=p;}catch(e){}})();`;
+/** Inlined in <head> before stylesheets to prevent theme FOUC (full load + view transitions). */
+export const themeInitScript = `(function(){try{var k='theme';function apply(){var p=localStorage.getItem(k)||'system';var t=p==='dark'?'dark':p==='light'?'light':(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.dataset.theme=t;document.documentElement.dataset.themePreference=p;}apply();document.addEventListener('astro:after-swap',apply);}catch(e){}})();`;

@@ -29,6 +29,8 @@
     system: 'Theme: system. Activate to switch to light mode.',
   };
 
+  let mediaBound = false;
+
   function resolveTheme(preference: string): 'light' | 'dark' {
     if (preference === 'dark') return 'dark';
     if (preference === 'light') return 'light';
@@ -68,16 +70,24 @@
 
     updateToggle(preference);
 
-    document.querySelector('[data-theme-toggle]')?.addEventListener('click', cycleTheme);
+    const button = document.querySelector<HTMLButtonElement>('[data-theme-toggle]');
+    if (button && button.dataset.themeBound !== 'true') {
+      button.dataset.themeBound = 'true';
+      button.addEventListener('click', cycleTheme);
+    }
 
-    window
-      .matchMedia('(prefers-color-scheme: dark)')
-      .addEventListener('change', () => {
-        if ((localStorage.getItem(STORAGE_KEY) ?? 'system') === 'system') {
-          applyTheme('system');
-        }
-      });
+    if (!mediaBound) {
+      mediaBound = true;
+      window
+        .matchMedia('(prefers-color-scheme: dark)')
+        .addEventListener('change', () => {
+          if ((localStorage.getItem(STORAGE_KEY) ?? 'system') === 'system') {
+            applyTheme('system');
+          }
+        });
+    }
   }
 
   initThemeToggle();
+  document.addEventListener('astro:page-load', initThemeToggle);
 </script>
