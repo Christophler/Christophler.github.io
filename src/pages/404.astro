@@ -1,0 +1,24 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import InternalLink from '../components/InternalLink.astro';
+import { site } from '../data/site';
+---
+
+<BaseLayout
+  title={`Page not found · ${site.name}`}
+  description="The page you requested could not be found."
+>
+  <section class="page-header not-found">
+    <h1>Page not found</h1>
+    <p>The page you're looking for doesn't exist or may have moved.</p>
+    <p class="hero-cta">
+      <InternalLink href="/">Home</InternalLink>
+      <span class="hero-cta-sep" aria-hidden="true">·</span>
+      <InternalLink href="/projects">Projects</InternalLink>
+      <span class="hero-cta-sep" aria-hidden="true">·</span>
+      <InternalLink href="/writeups">Writeups</InternalLink>
+      <span class="hero-cta-sep" aria-hidden="true">·</span>
+      <InternalLink href="/experience">Experience</InternalLink>
+    </p>
+  </section>
+</BaseLayout>

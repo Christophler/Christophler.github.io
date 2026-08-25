@@ -241,6 +241,10 @@ p {
   font-size: 1.0625rem;
 }
 
+.not-found {
+  max-width: var(--content-prose);
+}
+
 /* In-page hash targets clear the sticky site header */
 .page-section-anchor,
 .availability h2,
