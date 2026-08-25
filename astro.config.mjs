@@ -1,5 +1,6 @@
 import { defineConfig } from 'astro/config';
 import mdx from '@astrojs/mdx';
+import sitemap from '@astrojs/sitemap';
 import { unified } from '@astrojs/markdown-remark';
 import rehypeSlug from 'rehype-slug';
 import rehypeAutolinkHeadings from 'rehype-autolink-headings';
@@ -12,7 +13,7 @@ export default defineConfig({
     prefetchAll: false,
     defaultStrategy: 'hover',
   },
-  integrations: [mdx()],
+  integrations: [mdx(), sitemap()],
   markdown: {
     shikiConfig: {
       theme: 'github-dark-default',

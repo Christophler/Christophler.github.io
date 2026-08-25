@@ -7,15 +7,23 @@ import '@fontsource/plus-jakarta-sans/700.css';
 import '../styles/global.css';
 import Footer from '../components/Footer.astro';
 import Nav from '../components/Nav.astro';
+import SeoHead from '../components/SeoHead.astro';
 import { site } from '../data/site';
 import { themeInitScript } from '../scripts/theme-init.ts';
 
 interface Props {
   title?: string;
   description?: string;
+  image?: string;
+  noindex?: boolean;
 }
 
-const { title = site.name, description = site.tagline } = Astro.props;
+const {
+  title = site.name,
+  description = site.tagline,
+  image,
+  noindex = false,
+} = Astro.props;
 ---
 
 <!doctype html>
@@ -24,8 +32,8 @@ const { title = site.name, description = site.tagline } = Astro.props;
     <meta charset="utf-8" />
     <script is:inline set:html={themeInitScript} />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content={description} />
     <title>{title}</title>
+    <SeoHead title={title} description={description} image={image} noindex={noindex} />
     <ClientRouter fallback="swap" />
   </head>
   <body>
