@@ -10,7 +10,17 @@ interface Props {
 }
 
 const { headings } = Astro.props;
-const toc = headings.filter((heading) => heading.depth >= 2 && heading.depth <= 3);
+
+function tocLabel(text: string) {
+  return text.replace(/\s*#+\s*$/u, '').trim();
+}
+
+const toc = headings
+  .filter((heading) => heading.depth >= 2 && heading.depth <= 3)
+  .map((heading) => ({
+    ...heading,
+    text: tocLabel(heading.text),
+  }));
 ---
 
 {
