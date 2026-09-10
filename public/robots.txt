@@ -1,4 +1,5 @@
 User-agent: *
-Allow: /
+Disallow: /resume
+Disallow: /assets
 
 Sitemap: https://christophler.github.io/sitemap-index.xml
