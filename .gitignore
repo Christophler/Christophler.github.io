@@ -26,6 +26,9 @@ Thumbs.db
 .vscode/
 .idea/
 
+# Template files
+templates/
+
 # Local memos (not published)
 README.local.md
 public/assets/README.md
