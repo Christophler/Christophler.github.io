@@ -1,0 +1,45 @@
+---
+title: Sanity Check — finding the odd flag in 8001 lookalikes
+description: A TraceBash 2026 misc challenge where nearly every decoy file started with TBCTF — except one that began with a leading space.
+date: "2026-06-27"
+updated: "2026-06-27"
+tags:
+  - ctf
+  - misc
+  - forensics
+platform: TraceBash 2026
+difficulty: easy
+---
+
+import Spoiler from '../../components/Spoiler.astro';
+
+## Challenge
+
+**Sanity Check** (100 pts) dropped a folder of 8001 text files, each looking like a plausible flag. Spot-checking random files confirmed they all contained `TBCTF{...}` strings — so the real flag had to stand out by something other than format alone.
+
+## Approach
+
+1. Sample several files and confirm the shared prefix pattern: `TBCTF{...}`
+2. Assume the real one breaks that pattern somehow (content, encoding, whitespace, or filename)
+3. Search for files that do **not** start with `TBCTF` using PowerShell:
+
+```powershell
+Select-String -Path *.txt -Pattern '^TBCTF' -NotMatch
+```
+
+4. Inspect the hit — `flag_3482.txt` started with a blank space before the flag string
+5. Submit that value; it validated
+
+When thousands of candidates look identical, invert the search: find what does **not** match the common pattern instead of reading files one by one.
+
+## Takeaways
+
+- Decoy volume is a hint to automate anomaly detection, not manual review
+- Leading/trailing whitespace is a classic “looks the same, isn’t” trick
+- `Select-String` / `grep -v` style inverted matches are enough for this class of misc puzzle
+
+<Spoiler title="Flag">
+File: `flag_3482.txt` (leading space before the flag text)
+
+`TBCTF{s4n1ty_v3r1f13d_8291}`
+</Spoiler>

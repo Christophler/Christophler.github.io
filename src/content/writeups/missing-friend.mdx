@@ -1,0 +1,44 @@
+---
+title: Missing Friend — OSINT from a MotoGP sign to a Plus Code
+description: A TraceBash 2026 OSINT challenge that used a PERTAMINA MotoGP photo and a bar image to pin a Lombok venue via Google Maps Plus Code.
+date: "2026-06-27"
+updated: "2026-06-27"
+tags:
+  - ctf
+  - osint
+  - geolocation
+platform: TraceBash 2026
+difficulty: easy
+---
+
+import Spoiler from '../../components/Spoiler.astro';
+
+## Challenge
+
+**Missing Friend** (100 pts) provided images, including a MotoGP-related photo with a **PERTAMINA** sign and a separate food/bar photo. The brief implied a real place tied to that event context.
+
+## Approach
+
+1. Pull readable text from the MotoGP image — `PERTAMINA` stood out
+2. Search `PERTAMINA MotoGP 2025` and identify the **PERTAMINA Grand Prix of Indonesia 2025**
+3. Try venue maps for the circuit — no useful match to the bar photo
+4. Try after-party / event nightlife searches — also a dead end
+5. Pivot: search bars near the track area and visually compare to the attached food/bar image
+6. Match **Cantina Mexicana Kuta Lombok** to the photo
+7. Copy the Google Maps **Plus Code** for that place and submit it as the flag
+
+Visual confirmation beat map hunting. Once the venue matched, the Plus Code was sitting on the Maps listing.
+
+## Takeaways
+
+- Extract brand/event text from photos before guessing locations
+- Dead ends (venue maps, after-parties) are useful — they tell you to change the query, not quit
+- Side-by-side image matching against local businesses is a standard geolocation move
+- Google Maps Plus Codes are compact, location-specific strings that fit CTF flag formats well
+
+<Spoiler title="Flag">
+Venue: Cantina Mexicana Kuta Lombok  
+Plus Code: `475G+QQ`
+
+`TBCTF{475G+QQ}`
+</Spoiler>

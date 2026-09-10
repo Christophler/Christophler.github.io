@@ -1,0 +1,44 @@
+---
+title: Echo Chamber — OSINT from a forum slang to a geocache GC code
+description: A TraceBash 2026 OSINT challenge that linked forum slang (f2f) to geocaching, then to a real cache GC code used as the flag.
+date: "2026-06-27"
+updated: "2026-06-27"
+tags:
+  - ctf
+  - osint
+  - geocaching
+platform: TraceBash 2026
+difficulty: easy
+---
+
+import Spoiler from '../../components/Spoiler.astro';
+
+## Challenge
+
+**Echo Chamber** (100 pts) came with a player brief that pointed at a real-world identifying code, plus a forum thread to dig through. The goal was not a crypto break — it was connecting slang, hobby jargon, and a public listing.
+
+## Approach
+
+1. Read the player brief markdown and note the ask: find a real-world identifying code
+2. Scan the forum thread; user `rainyhike22` mentioned **f2f**
+3. Search what `f2f` means in outdoor / puzzle communities — it maps to **first-to-find** in geocaching
+4. Confirm that geocaches use unique public IDs (GC codes)
+5. Search using distinctive phrases from the thread / brief — e.g. `son of gasworks scrabble cache`
+6. Land on the matching geocache listing and read its GC code
+7. Submit the code in lowercase as the flag
+
+## Why this worked
+
+OSINT challenges often chain: in-fiction slang → community jargon → public database → identifier. Once `f2f` placed the problem in geocaching, the search space narrowed to cache titles and GC codes instead of arbitrary strings on the internet.
+
+## Takeaways
+
+- Treat unexplained acronyms in challenge lore as search queries
+- Niche hobbies (geocaching, amateur radio, etc.) have stable ID formats that make good flags
+- Distinctive proper nouns from the brief beat broad keyword searches
+
+<Spoiler title="Flag">
+Geocache: “Son of Gasworks Scrabble” — code `GCK4GH`
+
+`TBCTF{gck4gh}`
+</Spoiler>
