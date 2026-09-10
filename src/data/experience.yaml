@@ -7,7 +7,7 @@ entries:
     bullets:
       - built: Python and SQL automation for web, REST API, and backend validation workflows, integrating repeatable checks into Azure DevOps CI/CD pipelines, saving 3 hours/test run
       - deployed: API validation and performance-testing workflows with Apache JMeter; analyzed Google Analytics data to support quality and reliability reporting
-      - improved: automated test-environment provisioning, refreshes, scheduling, and test-data workflows; led POCs for new TEM tooling to improve test reliability
+      - improved: Automated test-environment provisioning, refreshes, scheduling, and test-data workflows; led POCs for new TEM tooling to improve test reliability
   - role: Software Engineering Intern
     company: Cognitive Systems Corp
     location: Waterloo, ON
@@ -15,26 +15,26 @@ entries:
     end: 2024-12
     bullets:
       - built: Wi-Fi router test-case automation in pytest and Bash for initial testing of new routers against minimum performance KPIs, cutting validation time by 2 hours
-      - improved: Python and C-based software in Linux environments by debugging and patching issues identified during internal and client-side testing
+      - built: Workflow and setup documentation that reduced onboarding time by 25% and improved knowledge transfer across departments
       - deployed: TeamCity and Bitbucket CI/CD pipelines for repeatable integration testing and deployments; used pull requests and peer reviews to reduce regression risk
-      - improved: cross-team traceability by documenting integration issues in JIRA with reproduction steps, fixes, and ownership
-      - built: workflow and setup documentation that reduced onboarding time by 25% and improved knowledge transfer across departments
-      - improved:  failed platform-test debugging by reproducing issues, isolating root causes, and collaborating with internal QA teams and clients to resolve KPI misalignments
+      - improved: Python and C-based software in Linux environments by debugging and patching issues identified during internal and client-side testing
+      - improved: Cross-team traceability by documenting integration issues in JIRA with reproduction steps, fixes, and ownership
+      - improved:  Failed platform-test debugging by reproducing issues, isolating root causes, and collaborating with internal QA teams and clients to resolve KPI misalignments
   - role: Cloud Engineering Intern
     company: Rogers Communications
     location: Toronto, ON
     start: 2023-01
     end: 2023-04
     bullets:
-      - built: an automation workflow with Azure Functions and Azure Power Automate, reducing repetitive work by 2 hours/week
+      - built: Automation workflow with Azure Functions and Azure Power Automate, reducing repetitive work by 2 hours/week
       - deployed: Azure tagging validation with a Python workflow in Azure Functions, integrating pandas, Azure CLI, and the JIRA REST API to save 15 hours/month
-      - improved: cloud reliability by using Azure Monitor to track performance, configure alerts, and support reliable cloud operations
-  - role: Data Automation Engineer Intern
+      - improved: Cloud reliability by using Azure Monitor to track performance, configure alerts, and support reliable cloud operations
+  - role: Software Engineering Intern
     company: Bombardier Aerospace
     location: Toronto, ON
     start: 2022-05
     end: 2022-08
     bullets:
+      - built: Python hvPlot dashboard from multiple CSV sources to automate weekly reporting for leadership
       - improved: Oracle-to-Excel reporting with SQL and VBA, reducing manual reporting effort by 3 hours/week
-      - built: a Python hvPlot dashboard from multiple CSV sources to automate weekly reporting for leadership
-      - deployed: a Power BI data model and dashboard used by 75+ employees, consolidating operational reporting and eliminating manual data compilation to save 10 hours/week
+      - deployed: Power BI data model and dashboard used by 75+ employees, consolidating operational reporting and eliminating manual data compilation to save 10 hours/week
