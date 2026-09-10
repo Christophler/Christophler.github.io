@@ -2,6 +2,7 @@
 import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import CredibilityStrip from '../components/CredibilityStrip.astro';
+import Education from '../components/Education.astro';
 import ExternalLink from '../components/ExternalLink.astro';
 import FeaturedProjects from '../components/FeaturedProjects.astro';
 import InternalLink from '../components/InternalLink.astro';
@@ -43,6 +44,7 @@ const writeupTeasers = (
   <CredibilityStrip />
   <FeaturedProjects />
   <Pillars />
+  <Education />
 
   <section class="landing-section" aria-labelledby="experience-snapshot-heading">
     <h2 id="experience-snapshot-heading">Experience</h2>

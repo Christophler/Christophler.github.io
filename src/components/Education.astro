@@ -1,0 +1,19 @@
+---
+import { education, formatConferralDate } from '../data/education';
+---
+
+<section class="landing-section" aria-labelledby="education-heading">
+  <h2 id="education-heading">Education</h2>
+  <ul class="plain-list">
+    {
+      education.entries.map((entry) => (
+        <li>
+          <span class="plain-list-primary">{entry.university}</span>
+          <span class="plain-list-muted">
+            {entry.program} · {formatConferralDate(entry.conferralDate)}
+          </span>
+        </li>
+      ))
+    }
+  </ul>
+</section>
