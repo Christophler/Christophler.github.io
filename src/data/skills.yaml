@@ -1,10 +1,14 @@
 groups:
   - label: Languages
-    items: [Python, TypeScript, Go, SQL]
+    items: [Python,C, SQL, Java, JavaScript, VBA]
   - label: Cloud
-    items: [Microsoft Azure (AZ-900), Azure AI (AI-900), Azure Data (DP-900), Docker, Kubernetes]
+    items: [Microsoft Azure, Google Cloud, Docker, Kubernetes, Power Automate]
+  - label: Testing
+    items: [pytest, Apache JMeter, Postman, JUnit]
   - label: DevOps
-    items: [GitHub Actions, Terraform, CI/CD, Monitoring]
-  - label: Data
-    items: [PostgreSQL, Redis, Event-driven systems]
-learning: [Rust, Platform engineering patterns]
+    items: [GitHub Actions, CI/CD, Monitoring, JIRA, Confluence, Azure DevOps]
+  - label: Data/APIs
+    items: [REST APIs, Oracle, Power BI, Google Analytics]
+  - label: Tools
+    items: [Git, TeamCity, Bitbucket, JIRA, Confluence]
+learning: [Testing]
