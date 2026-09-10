@@ -8,7 +8,6 @@ export interface SkillGroup {
 
 export interface SkillsConfig {
   groups: SkillGroup[];
-  learning: string[];
 }
 
 export const skills = parse(skillsYaml) as SkillsConfig;

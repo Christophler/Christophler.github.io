@@ -11,4 +11,3 @@ groups:
     items: [REST APIs, Oracle, Power BI, Google Analytics]
   - label: Tools
     items: [Git, TeamCity, Bitbucket, JIRA, Confluence]
-learning: [Testing]
