@@ -12,11 +12,15 @@ accept = ["200", "204", "206", "429"]
 # Resolve site-root absolute paths (e.g. /projects/) against the build output
 root_dir = "./dist"
 
-# Skip mailto and hosts that often rate-limit or block CI bots
+# Skip mailto and hosts that often rate-limit or block CI bots.
+# Also skip this site's own absolute URLs (sitemap/canonical): they 404 on
+# GitHub Pages until after deploy, which would block the deploy that publishes them.
+# Path-absolute links like /writeups/ are still checked against ./dist via root_dir.
 exclude = [
   '^mailto:',
   '^https://(www\.)?linkedin\.com',
   '^https://(www\.)?credly\.com',
+  '^https://christophler\.github\.io',
 ]
 
 # Don't treat the custom 404 page as a normal crawl target
