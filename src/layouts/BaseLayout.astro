@@ -20,7 +20,7 @@ interface Props {
 
 const {
   title = site.name,
-  description = site.tagline,
+  description = site.tagline.join(' '),
   image,
   noindex = false,
 } = Astro.props;

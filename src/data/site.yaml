@@ -1,9 +1,17 @@
 name: Christopher Law
 shortName: Chris
-title: Backend & Cloud Engineer
-tagline: I build reliable APIs, cloud infrastructure, and automation that teams can operate with confidence.
+title: Software Engineer with a focus on Backend & Cloud Engineering
+tagline:
+  - >-
+    I'm a software engineer who enjoys making systems more reliable, improving
+    testing, and automating repetitive work. I've worked with backend services,
+    APIs, databases, CI/CD pipelines, cloud infrastructure, and Python and SQL,
+    and I like digging into problems to understand what's really going on and
+    build solutions that hold up over time.
+  - >-
+    Outside of work, I'm usually listening to K-R&B or K-alt rock, or indoor
+    bouldering and wondering why the easiest-looking route is always the hardest.
 github: https://github.com/Christophler
 linkedin: https://linkedin.com/in/chrisdlaw
 email: christopher.law0215@gmail.com
 resumePath: /assets/Christopher_Law_Resume.pdf
-showOpenToWorkPill: true

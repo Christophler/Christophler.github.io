@@ -5,12 +5,11 @@ export interface SiteConfig {
   name: string;
   shortName: string;
   title: string;
-  tagline: string;
+  tagline: string[];
   github: string;
   linkedin: string;
   email: string;
   resumePath: string;
-  showOpenToWorkPill: boolean;
 }
 
 export const site = parse(siteYaml) as SiteConfig;

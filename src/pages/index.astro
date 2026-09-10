@@ -3,10 +3,8 @@ import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import CredibilityStrip from '../components/CredibilityStrip.astro';
 import Education from '../components/Education.astro';
-import ExternalLink from '../components/ExternalLink.astro';
 import FeaturedProjects from '../components/FeaturedProjects.astro';
 import InternalLink from '../components/InternalLink.astro';
-import Pillars from '../components/Pillars.astro';
 import SkillsTags from '../components/SkillsTags.astro';
 import { experience, formatExperiencePeriod } from '../data/experience';
 import { site } from '../data/site';
@@ -33,7 +31,9 @@ const writeupTeasers = (
   <section class="hero">
     <h1>{site.name}</h1>
     <p class="hero-role">{site.title}</p>
-    <p class="hero-tagline">{site.tagline}</p>
+    {site.tagline.map((paragraph) => (
+      <p class="hero-tagline">{paragraph}</p>
+    ))}
     <p class="hero-cta">
       <InternalLink href="/projects">View projects</InternalLink>
       <span class="hero-cta-sep" aria-hidden="true">·</span>
@@ -43,8 +43,6 @@ const writeupTeasers = (
 
   <CredibilityStrip />
   <FeaturedProjects />
-  <Pillars />
-  <Education />
 
   <section class="landing-section" aria-labelledby="experience-snapshot-heading">
     <h2 id="experience-snapshot-heading">Experience</h2>
@@ -64,6 +62,8 @@ const writeupTeasers = (
       <InternalLink href="/experience">Full experience & certifications</InternalLink>
     </p>
   </section>
+  
+  <Education />
 
   <section class="landing-section" aria-labelledby="writeups-teaser-heading">
     <h2 id="writeups-teaser-heading">Writeups</h2>
@@ -86,16 +86,4 @@ const writeupTeasers = (
   </section>
 
   <SkillsTags />
-
-  <section class="contact-cta" aria-labelledby="contact-cta-heading">
-    <h2 id="contact-cta-heading">Contact</h2>
-    <p>
-      Open to backend and cloud roles -
-      <a href={`mailto:${site.email}`}>Email</a>
-      ·
-      <ExternalLink href={site.linkedin}>LinkedIn</ExternalLink>
-      ·
-      <ExternalLink href={site.github}>GitHub</ExternalLink>
-    </p>
-  </section>
 </BaseLayout>
