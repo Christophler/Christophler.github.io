@@ -1,0 +1,31 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { site } from '../data/site';
+---
+
+<BaseLayout
+  title={`Resume · ${site.name}`}
+  description={`Resume PDF for ${site.name} — ${site.title}.`}
+>
+  <section class="resume-page">
+    <header class="page-header resume-page-header">
+      <h1>Resume</h1>
+      <p>
+        <a href={site.resumePath} download>Download PDF</a>
+      </p>
+    </header>
+
+    <div class="resume-viewer-frame">
+      <iframe
+        class="resume-viewer"
+        src={`${site.resumePath}#view=FitH`}
+        title={`Resume PDF — ${site.name}`}
+      ></iframe>
+      <p class="resume-viewer-fallback">
+        Can’t view the PDF in your browser?
+        <a href={site.resumePath} download> Download the resume </a>
+        instead.
+      </p>
+    </div>
+  </section>
+</BaseLayout>

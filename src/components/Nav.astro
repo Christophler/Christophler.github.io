@@ -1,13 +1,6 @@
 ---
-import type { SiteConfig } from '../data/site';
 import InternalLink from './InternalLink.astro';
 import ThemeToggle from './ThemeToggle.astro';
-
-interface Props {
-  site: SiteConfig;
-}
-
-const { site } = Astro.props;
 
 const navItems = [
   { href: '/', label: 'Home' },
@@ -29,7 +22,7 @@ const navItems = [
       }
     </ul>
     <div class="site-header-actions">
-      <a class="nav-resume" href={site.resumePath} download data-astro-reload>Resume</a>
+      <InternalLink class="nav-resume" href="/resume">Resume</InternalLink>
       <ThemeToggle />
     </div>
   </nav>
