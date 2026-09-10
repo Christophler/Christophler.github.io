@@ -983,11 +983,17 @@ p {
 }
 
 .open-to-work-pill {
-  font-size: 0.875rem;
-  color: var(--color-text-muted);
-  border: 1px solid var(--color-border);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  color: var(--color-accent-hover);
+  background: var(--color-accent-subtle);
+  border: 1px solid var(--color-accent);
   border-radius: var(--radius-sm);
   padding: 0.25rem 0.625rem;
+}
+[data-theme='dark'] .open-to-work-pill {
+  color: var(--color-accent);
 }
 
 .nav-resume {
