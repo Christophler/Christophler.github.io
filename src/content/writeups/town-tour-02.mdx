@@ -1,0 +1,44 @@
+---
+title: Town Tour 02 — OSINT from a Vinaphone storefront to a nearby mart
+description: A V1T 2026 OSINT challenge that used reverse image search and a Vietnamese news caption to pin a Sơn Tây VNPT building, then a chain supermarket one minute away.
+date: "2026-06-27"
+updated: "2026-06-27"
+tags:
+  - ctf
+  - osint
+  - geolocation
+platform: V1t CTF 2026
+difficulty: easy
+---
+
+import Spoiler from '../../components/Spoiler.astro';
+
+## Challenge
+
+**Town Tour 02** (100 pts) gave a photo of a business storefront. The goal was to identify a nearby chain supermarket implied by the challenge description and submit its name in the flag format.
+
+## Approach
+
+1. Identify the brand in the photo — a **Vinaphone** / VNPT telecommunications location in Vietnam
+2. Translate the main board text — little useful signal for geolocation
+3. Reverse-image search the photo; land on a Vietnamese news article with the same building from another angle: [VNPT Hà Nội – Telecommunications Center 8](https://langngheviet.com.vn/vnpt-ha-noi-trung-tam-vien-thong-8-gop-phan-tich-cuc-vao-su-phat-trien-va-doi-moi-cua-nganh-3877.html)
+4. Translate the image subtitle in that article — it placed the site as a **Service Business Point of VNPT Hanoi’s Telecommunications Center 8 in Sơn Tây Town**
+5. Search Vinaphone / VNPT locations in Sơn Tây and compare Map / Street View angles until the building matched the challenge photo
+6. Search nearby chain supermarkets; one was about a minute away and fit the brief
+7. Format the mart name as the flag and submit
+
+Brand recognition got the country and industry; reverse image search plus caption translation got the town; map verification got the exact building; proximity + “chain supermarket” got the answer.
+
+## Takeaways
+
+- OCR/translate of signage is worth a try, but reverse image search often finds the same facade faster
+- News captions and photo credits are high-signal geolocation sources — translate subtitles, not only headlines
+- Once you have a town, verify candidates visually in Maps before hunting secondary POIs
+- Challenge constraints (“nearby”, “chain”) shrink the search around a confirmed pin
+
+<Spoiler title="Flag">
+Confirmed building: VNPT / Vinaphone service point, Sơn Tây (Telecommunications Center 8)  
+Nearby chain supermarket: Lan Chi Mart
+
+`v1t{Lan_Chi_Mart}`
+</Spoiler>
