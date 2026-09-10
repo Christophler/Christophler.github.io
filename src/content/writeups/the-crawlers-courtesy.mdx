@@ -1,0 +1,43 @@
+---
+title: The Crawler's Courtesy — finding what robots.txt hides
+description: An easy Riffhack 2026 web challenge where a public robots.txt file pointed straight at a disallowed path that held the flag.
+date: "2026-06-20"
+updated: "2026-06-21"
+tags:
+  - ctf
+  - web
+  - reconnaissance
+platform: Riffhack 2026
+difficulty: easy
+---
+
+import Spoiler from '../../components/Spoiler.astro';
+
+## Challenge
+
+**The Crawler's Courtesy** (75 pts) was an easy web puzzle. The name and hint both steered toward how search engines and scrapers decide what they are allowed to fetch.
+
+## Approach
+
+1. Treat the challenge name as a signal — "crawler" and "courtesy" map cleanly to `robots.txt`
+2. Request `{challenge_url}/robots.txt` and read the allow/disallow rules as plain text
+3. Note any `Disallow` paths — they are not secrets, only instructions for well-behaved bots
+4. Fetch the disallowed path in a normal browser session and inspect the response
+
+That was enough. No scanning, auth bypass, or tooling beyond a browser was required.
+
+## What `robots.txt` actually is
+
+`robots.txt` is a public convention at the site root. Operators use it to ask crawlers to skip certain paths. Anyone can read it, and nothing forces a client to obey it — so treating a disallowed path as "hidden" is a common misconfiguration pattern in CTFs and in the wild.
+
+## Takeaways
+
+- Challenge naming and hints are part of the problem statement — follow them before reaching for heavy tooling
+- Public metadata (`robots.txt`, sitemaps, well-known paths) is fair game for recon
+- `Disallow` is a courtesy request, not access control
+
+<Spoiler title="Flag">
+`bitflag{r0b0ts_4r3_n0t_4_s3cr3t_v4ult}`
+
+Disallowed path that held the flag: `/operator-cache-drop`
+</Spoiler>
