@@ -11,15 +11,14 @@ const { site } = Astro.props;
 
 const navItems = [
   { href: '/', label: 'Home' },
+  { href: '/experience', label: 'Experience' },
   { href: '/projects', label: 'Projects' },
   { href: '/writeups', label: 'Writeups' },
-  { href: '/experience', label: 'Experience' },
 ];
 ---
 
 <header class="site-header" transition:persist="site-header">
   <nav aria-label="Main">
-    <InternalLink class="site-logo" href="/">{site.name}</InternalLink>
     <ul class="site-nav-links">
       {
         navItems.map((item) => (
@@ -30,7 +29,6 @@ const navItems = [
       }
     </ul>
     <div class="site-header-actions">
-      {site.showOpenToWorkPill && <span class="open-to-work-pill">Open to work</span>}
       <a class="nav-resume" href={site.resumePath} download data-astro-reload>Resume</a>
       <ThemeToggle />
     </div>
