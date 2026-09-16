@@ -1,5 +1,5 @@
 entries:
-  - role: Software Development Engineer in Test (SDET)
+  - role: Software Development Engineer (SDE)
     company: Greenshield
     location: Toronto, ON
     start: 2026-08
@@ -8,7 +8,7 @@ entries:
       - built: Python and SQL automation for web, REST API, and backend validation workflows, integrating repeatable checks into Azure DevOps CI/CD pipelines, saving 3 hours/test run
       - deployed: API validation and performance-testing workflows with Apache JMeter; analyzed Google Analytics data to support quality and reliability reporting
       - improved: Automated test-environment provisioning, refreshes, scheduling, and test-data workflows; led POCs for new TEM tooling to improve test reliability
-  - role: Software Engineering Intern
+  - role: Software Engineer Intern
     company: Cognitive Systems Corp
     location: Waterloo, ON
     start: 2024-05
@@ -20,7 +20,7 @@ entries:
       - improved: Python and C-based software in Linux environments by debugging and patching issues identified during internal and client-side testing
       - improved: Cross-team traceability by documenting integration issues in JIRA with reproduction steps, fixes, and ownership
       - improved:  Failed platform-test debugging by reproducing issues, isolating root causes, and collaborating with internal QA teams and clients to resolve KPI misalignments
-  - role: Cloud Engineering Intern
+  - role: Cloud Engineer Intern
     company: Rogers Communications
     location: Toronto, ON
     start: 2023-01
@@ -29,7 +29,7 @@ entries:
       - built: Automation workflow with Azure Functions and Azure Power Automate, reducing repetitive work by 2 hours/week
       - deployed: Azure tagging validation with a Python workflow in Azure Functions, integrating pandas, Azure CLI, and the JIRA REST API to save 15 hours/month
       - improved: Cloud reliability by using Azure Monitor to track performance, configure alerts, and support reliable cloud operations
-  - role: Software Engineering Intern
+  - role: Software Engineer Intern
     company: Bombardier Aerospace
     location: Toronto, ON
     start: 2022-05
